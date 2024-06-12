@@ -1,0 +1,3 @@
+[submodule "frontend/project"]
+	path = frontend/project
+	url = https://github.com/dama55/textapp-front.git
