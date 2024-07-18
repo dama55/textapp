@@ -39,6 +39,7 @@ db.connect(err => {
     setTimeout(connectWithRetry, 5000);
   } else{
     console.log('Connected to the MySQL server.');
+
   } 
 });
 
@@ -107,6 +108,11 @@ app.delete('/delete-text', (req, res) => {
   const { id } = req.body;
   const query = 'DELETE FROM texts WHERE id = ?';
 
+  if (!id){
+    console.log('ID is undefined');
+    return res.status(400).send('ID is required');
+  }
+
   contentManager.deleteRow(id).then( result => {
     console.log(result);
     res.send(result);
@@ -127,13 +133,15 @@ app.delete('/delete-text', (req, res) => {
 //   res.status(500).json({error: "Failed to add new data."});
 // })
 
-delid = "1d32c1fd-623d-4194-b5f1-3c287aaefcb8";
+// delid = "1d32c1fd-623d-4194-b5f1-3c287aaefcb8";
 
-contentManager.deleteRow(delid).then( result => {
-  console.log(result);
-}).catch( err => {
-  console.error(err);
-})
+// contentManager.deleteRow(delid).then( result => {
+
+//   console.log(result);
+
+// }).catch( err => {
+//   console.error(err);
+// })
 
 
 contentManager.getTable().then((content)=> {
